@@ -6,20 +6,16 @@
 #### [tflocal](https://github.com/localstack/terraform-local)
 
  Can be installed with:
-
-    ```bash
-    $pip3 install terraform-local
-    ```
-    
+```bash
+$pip3 install terraform-local
+```
 #### [awscli](https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)
 #### [awscli-local](https://github.com/localstack/awscli-local)
-    
-    awscli must be install. Otherwise, the command will not work. Can be installed with:
 
-    ```bash
-    $pip3 install awscli-local
-    ```
-
+awscli must be install. Otherwise, the command will not work. Can be installed with:
+```bash
+$pip3 install awscli-local
+```
 
 ### Resources
 - [Localstack containers](https://www.localstack.cloud/)
