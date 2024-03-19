@@ -88,6 +88,11 @@ needed.
 > The credentials had to be added here, as they are not set in the terraform configuration (for now). The can be exported as env variables though.
 If there were resources to create, the command to be used would be `tflocal apply`.
 
+Shutdown the emulator with
+´´´bash
+$docker-compose down
+´´´
+
 ### Following steps
 * Persist IAM roles
 * Create resources
