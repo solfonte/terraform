@@ -12,7 +12,7 @@ $pip3 install terraform-local
 #### [awscli](https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-install.html#getting-started-install-instructions)
 #### [awscli-local](https://github.com/localstack/awscli-local)
 
-awscli must be install. Otherwise, the command will not work. Can be installed with:
+awscli must be installed. Otherwise, the commands will not work. Can be installed with:
 ```bash
 $pip3 install awscli-local
 ```
@@ -89,9 +89,9 @@ needed.
 If there were resources to create, the command to be used would be `tflocal apply`.
 
 Shutdown the emulator with
-´´´bash
+```bash
 $docker-compose down
-´´´
+```
 
 ### Following steps
 * Persist IAM roles
