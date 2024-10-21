@@ -19,7 +19,6 @@ provider "aws" {
   secret_key = "${var.secret_key}"
 }
 
-# set up EC2 virtual machine
 resource "aws_instance" "example" {
     ami = "ami-0c55b159cbfafe1f0"
     instance_type = "t2.micro"
@@ -36,7 +35,6 @@ resource "aws_instance" "example" {
     }
 }
 
-# To allow the EC2 Instance to receive traffic on port 8080, you need to create a security group
 resource "aws_security_group" "instance" {
     name = "terraform-example-instance"
     ingress {
@@ -47,10 +45,8 @@ resource "aws_security_group" "instance" {
     }
 }
 
-# instead of having to manually poke around the EC2 console to
-# find the IP address of your server, you can provide the IP address as an
-# output variable
 output "public_ip" {
     value = aws_instance.example.public_ip
     description = "The public IP address of the web server"
 }
+
