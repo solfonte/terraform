@@ -54,7 +54,3 @@ output "public_ip" {
     value = aws_instance.example.public_ip
     description = "The public IP address of the web server"
 }
-
-
-#"LKIAQAAAAAAAFXMTDSWU"
-#"DlMa2CAr/8HPWWuD7JCy/8H9MyedBQsL7Rv/fIfD"
