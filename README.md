@@ -71,7 +71,7 @@ $ export TF_VAR_secret_key=MtOJ82mulOmYSwtaJr0Idi+/6bNVVUjZ5dATCjqq
 Save these somewhere safe as terraform will ask for them later.  
 
 #### Initialize the infra
-> To build the infra we are also going to use the local terraform command `tflocal`
+> To build the infra we are also going to use the local terraform command `tflocal`. This should be ran on each env folder for each folder with a `main.tf` file
 
 First, run the `tflocal init`. This command initializes the necessary dependencies.
 Then, we can run the `tflocal plan` command to view the changes terraform is going to apply.
