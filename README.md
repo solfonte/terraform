@@ -27,39 +27,45 @@ Next, we need to create a user to get its [credentials](https://docs.localstack.
 > The initiated AWS emulator does not have any but the ROOT user (which is not recommended for any operation other than creating users)
 
 We need to use the local aws cli.  
-`$ awslocal iam create-user --user-name <USER_NAME>`
+1. Run the script `credentials.sh`.
 
-Replace `<USER_NAME>` with the name you want. For example:
 ```bash
-$awslocal iam create-user --user-name sol
-
-{
-    "User": {
-        "Path": "/",
-        "UserName": "sol",
-        "UserId": "42djzra41mfrmpb580mu",
-        "Arn": "arn:aws:iam::000000000000:user/sol",
-        "CreateDate": "2024-03-18T23:44:01.131000+00:00"
-    }
-}
+$ sh credentials.sh <USER_NAME>
 ```
 
-Next, we create credentials for this new user  
-`$awslocal iam create-access-key --user-name <USER_NAME>`
+example output:
 
 ```bash
-$awslocal iam create-access-key --user-name sol
-
+Creating iam user
+{
+"User": {
+"Path": "/",
+"UserName": "solci",
+"UserId": "8idq8wp0qpu8vn5i23ha",
+"Arn": "arn:aws:iam::000000000000:user/solci",
+"CreateDate": "2024-10-26T12:15:49.157000+00:00"
+}
+}
+Creating access keys
 {
     "AccessKey": {
-        "UserName": "sol",
-        "AccessKeyId": "LKIAQAAAAAAADRGEVZB4",
+        "UserName": "solci",
+        "AccessKeyId": "LKIAQAAAAAAAK5A24XG2",
         "Status": "Active",
-        "SecretAccessKey": "TzZ01rpFK3hpS6TsxLlvPf/gaQNUYC8jZhb4bwcj",
-        "CreateDate": "2024-03-18T23:47:05+00:00"
+        "SecretAccessKey": "MtOJ82mulOmYSwtaJr0Idi+/6bNVVUjZ5dATCjqq",
+        "CreateDate": "2024-10-26T12:15:54+00:00"
     }
 }
+Access key id: LKIAQAAAAAAAK5A24XG2
+Secret Access key: MtOJ82mulOmYSwtaJr0Idi+/6bNVVUjZ5dATCjqq
 ```
+
+2. Export the resulting values to the shell as env variables
+```bash
+$ export TF_VAR_access_key=LKIAQAAAAAAAK5A24XG2
+$ export TF_VAR_secret_key=MtOJ82mulOmYSwtaJr0Idi+/6bNVVUjZ5dATCjqq
+```
+
 > These aren't actual AWS credentials you can use to access a real aws account so there is not an actual issue sharing them. But we still develop the infra with terraform as if they were to keep the good practices :)
 
 Save these somewhere safe as terraform will ask for them later.  
