@@ -6,6 +6,15 @@ terraform {
             version = "~> 4.0"
         }
     }
+
+    backend "s3" {
+        bucket = "state-file-storage"
+        key = "global/s3/terraform.tfstate"
+        region = "us-east-1"
+
+        dynamodb_table = "state-file-lock"
+        encrypt = true
+    }
 }
 
 # define aws access key variables
@@ -49,3 +58,33 @@ output "public_ip" {
     value = aws_instance.example.public_ip
     description = "The public IP address of the web server"
 }
+
+# Bucket to store the terraform state file
+resource "aws_s3_bucket" "terraform_state_storage" {
+    bucket = "backend"
+
+    # Prevent accidental deletion for this S3 bucket
+    lifecycle {
+        prevent_destroy = true
+    }
+
+    #versioning is deprecated
+   #server_side_encryption_configuration is deprecated
+}
+
+# DynamoDB table to lock the state file with the primary key LockID
+resource "aws_dynamodb_table" "terraform_locks" {
+    name = "state-file-lock"
+    billing_mode = "PAY_PER_REQUEST"
+    hash_key = "LockID"
+
+    attribute {
+      name = "LockID"
+      type = "S"
+    }
+}
+
+
+
+# "LKIAQAAAAAAABIMFELDE"
+# "ikL3ryH7CwyK999rJVV/YfGoh0tP3AjJMW1oqTf3"
