@@ -7,25 +7,46 @@ terraform {
         }
     }
 
-    backend "s3" {
+   /*  backend "s3" {
         bucket = "state-file-storage"
         key = "global/s3/terraform.tfstate"
         region = "us-east-1"
 
         dynamodb_table = "state-file-lock"
         encrypt = true
-    }
+    } */
 }
-
-# define aws access key variables
-variable "access_key" { type = string } 
-variable "secret_key" { type = string } 
 
 # set up cloud provider
 provider "aws" {
   region = "us-east-1"
   access_key = "${var.access_key}"
   secret_key = "${var.secret_key}"
+
+    s3_use_path_style = true
+
+  endpoints {
+    apigateway     = "http://localhost:4566"
+    cloudformation = "http://localhost:4566"
+    cloudwatch     = "http://localhost:4566"
+    dynamodb       = "http://localhost:4566"
+    es             = "http://localhost:4566"
+    firehose       = "http://localhost:4566"
+    iam            = "http://localhost:4566"
+    kinesis        = "http://localhost:4566"
+    lambda         = "http://localhost:4566"
+    route53        = "http://localhost:4566"
+    redshift       = "http://localhost:4566"
+    s3             = "http://s3.localhost.localstack.cloud:4566"
+    secretsmanager = "http://localhost:4566"
+    ses            = "http://localhost:4566"
+    sns            = "http://localhost:4566"
+    sqs            = "http://localhost:4566"
+    ssm            = "http://localhost:4566"
+    stepfunctions  = "http://localhost:4566"
+    sts            = "http://localhost:4566"
+    ec2            = "http://localhost:4566"
+  }
 }
 
 resource "aws_instance" "example" {
@@ -54,11 +75,6 @@ resource "aws_security_group" "instance" {
     }
 }
 
-output "public_ip" {
-    value = aws_instance.example.public_ip
-    description = "The public IP address of the web server"
-}
-
 # Bucket to store the terraform state file
 resource "aws_s3_bucket" "terraform_state_storage" {
     bucket = "backend"
@@ -84,7 +100,5 @@ resource "aws_dynamodb_table" "terraform_locks" {
     }
 }
 
-
-
-# "LKIAQAAAAAAABIMFELDE"
-# "ikL3ryH7CwyK999rJVV/YfGoh0tP3AjJMW1oqTf3"
+#"LKIAQAAAAAAADYXTP5UN"
+#"k/33LfT6vQ9MBYGOK98UPmaHOtPz6vdXZRWuZQyk"
